@@ -4,7 +4,6 @@
 
 ### Tester(s):
 **Name:** Ali Haji, Onyeisi Chidiebere  
-**Student ID:** [Lisää opiskelijanumerot]
 
 ### Purpose:
 Identify security vulnerabilities and functionality flaws in the Booking System web application, focusing on the registration and authentication mechanisms.
