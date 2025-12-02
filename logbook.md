@@ -15,4 +15,5 @@
 | 18.11.2025 | 3          | PortSwigger: Password reset broken logic                                 | Finished   |
 | 18.11.2025 | 3          | PortSwigger: Unprotected admin functionality                             | Finished   |
 | 18.11.2025 | 3          | PortSwigger: User role can be modified in user profile                   | Finished   |
-| 28.11.2025 | 5         | BookingSystem-Phase1: Test report + ZAP report                           | Finished   |
+| 28.11.2025 | 5          | BookingSystem-Phase1: Test report + ZAP report                           | Finished   |
+| 02.12.2025 | 4          | BookingSystem-Phase1 Part 2: Reports, Findings                           | Finished   |
