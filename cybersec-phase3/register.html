@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+    <link href="/static/tailwind.css" rel="stylesheet">
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 text-gray-900">
+  <main class="flex-grow">
+    <div class="container mx-auto p-4">
+        <div class="bg-white shadow-md rounded-lg p-6 mt-6 max-w-lg mx-auto">
+            <h1 class="text-2xl font-bold mb-4 text-center">Register</h1>
+            <form action="/register" method="POST">
+                <input type="hidden" name="csrf_token" value="6b2c8bde-769a-4f43-89a0-e32f13680144">
+                <div class="mb-4">
+                    <label for="username" class="block text-sm font-medium text-gray-700 font-bold">Email</label>
+                    <input type="email" id="username" name="username" placeholder="Enter your email" required class="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700 font-bold">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="birthdate" class="block text-sm font-medium text-gray-700 font-bold">Birthdate</label>
+                    <input type="date" id="birthdate" name="birthdate" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="mb-4">
+                    <label for="role" class="block text-sm font-medium text-gray-700 font-bold">Role</label>
+                    <select id="role" name="role" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        <option value="reserver">Reserver</option>
+                        <option value="administrator">Administrator</option>
+                    </select>
+                </div>
+                <div class="flex justify-between space-x-4">
+                    <button type="submit" class="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 w-1/2">Register</button>
+                    <a href="/" class="inline-block bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 w-1/2 text-center">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+  </main>
+  <div id="footer-placeholder"></div>
+  <script src="/static/footer.js"></script>
+</body>
+
+</html>
