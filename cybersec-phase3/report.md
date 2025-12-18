@@ -44,14 +44,14 @@ curl -s \
 # Tarkistin löytyykö lomake
 
 if grep -q "resource_name" /tmp/public_resources.html; then
-echo "VITUN VAKAVA ONGELMA: Resource lomake on julkinen!"
+echo "TODELLA VAKAVA ONGELMA: Resource lomake on julkinen!"
 echo "KUKA TAHANSA voi luoda ja muokata resursseja ilman kirjautumista."
 fi
 Tulos:
 
 text
 Status: 200
-VITUN VAKAVA ONGELMA: Resource lomake on julkinen!
+TODELLA VAKAVA ONGELMA: Resource lomake on julkinen!
 KUKA TAHANSA voi luoda ja muokata resursseja ilman kirjautumista.
 Miksi tämä on niin vakava:
 
@@ -338,3 +338,4 @@ Valtuutus: 40% (roolipohjainen valvonta puuttuu)
 Istunnot: 80% (evästeet turvallisia, mutta template bug)
 
 CSRF suoja: 30% (toimii joissain, muttei kaikkialla)
+
