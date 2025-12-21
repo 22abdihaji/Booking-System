@@ -64,7 +64,7 @@ Alla on kuvakaappaus PortSwigger Academyn työpöydästäni, joka osoittaa suori
 
 ---
 
-## Reflektio (Oppimiskokemuksesta)
+## Reflektio 
 
 Tämä kurssi opetti minut siirtymään teoreettisesta tietoturvatiedosta käytännön testaamiseen. Suurin oppiminen oli se, että turvallisuusvauriot löytyvät usein perusasioista, kuten puuttuvasta pääsynvalvonnasta tai heikoista salasanoista. Nyt ymmärrän, miten tärkeää on ajatella hyökkääjän näkökulmasta: testata kaikkea, mitä järjestelmä sallii, ei vain sitä, mitä sen pitäisi sallia. Käytännön työkalut kuten OWASP ZAP ja manuaalinen testaaminen cURL:lla antavat konkreettiset taidot, joita tarvitsen tulevissa tehtävissä.
 
@@ -97,6 +97,7 @@ Tämä kurssi opetti minut siirtymään teoreettisesta tietoturvatiedosta käyt�
 Kurssi tarjosi erinomaisen käytännönläheisen johdatuksen penetraatiotestaukseen. Booking System -projekti oli erityisen hyödyllinen, sillä se simuloi aidosti tyypillistä turvallisuustarkistuksen työnkulkua aina haavoittuvuuksien etsinnästä raportointiin. OWASP ZAP:n käyttö ja manuaalisen testauksen opettelu olivat arvokkaita taitoja. Ainoa parannusehdotus olisi enemmän aikaa ja mahdollisesti yksi ylimääräinen vaihe, joka keskittyisi XSS- tai SS-haavoittuvuuksiin.
 
 ---
+
 
 
 
