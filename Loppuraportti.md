@@ -77,12 +77,12 @@ Tämä kurssi opetti minut siirtymään teoreettisesta tietoturvatiedosta käyt�
 
 **Käytetyt tunnit yhteensä:** **49 tuntia**
 
-**Käytetyt tunnit aiheittain:**
+**Käytetyt tunnit aiheittain:**  **3 tuntia**
 
 | Aihe                            |    Tunnit     |
 | :------------------------------ | :-----------: |
-| **PortSwigger-laboratoriot**    |   15 tuntia   |
-| **Booking System -projekti**    |   30 tuntia   |
+| **PortSwigger-laboratoriot**    |   16 tuntia   |
+| **Booking System -projekti**    |   22 tuntia   |
 | &nbsp;&nbsp;• Vaihe 1           |   5 tuntia    |
 | &nbsp;&nbsp;• Vaihe 1, Part 2   |   4 tuntia    |
 | &nbsp;&nbsp;• Vaihe 2           |   5 tuntia    |
@@ -97,5 +97,6 @@ Tämä kurssi opetti minut siirtymään teoreettisesta tietoturvatiedosta käyt�
 Kurssi tarjosi erinomaisen käytännönläheisen johdatuksen penetraatiotestaukseen. Booking System -projekti oli erityisen hyödyllinen, sillä se simuloi aidosti tyypillistä turvallisuustarkistuksen työnkulkua aina haavoittuvuuksien etsinnästä raportointiin. OWASP ZAP:n käyttö ja manuaalisen testauksen opettelu olivat arvokkaita taitoja. Ainoa parannusehdotus olisi enemmän aikaa ja mahdollisesti yksi ylimääräinen vaihe, joka keskittyisi XSS- tai SS-haavoittuvuuksiin.
 
 ---
+
 
 
