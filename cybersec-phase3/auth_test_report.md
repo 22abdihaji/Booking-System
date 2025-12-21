@@ -27,7 +27,7 @@ Testing was performed using **manual cURL commands** via Docker Desktop's Exec t
 
 ---
 
-## 📡 Discovered Endpoints and Their Status
+##  Discovered Endpoints and Their Status
 
 | Endpoint           | HTTP Status     | Description                                              |
 | :----------------- | :-------------- | :------------------------------------------------------- |
@@ -109,14 +109,14 @@ Interpretation: Admin functions are either not implemented or are in a hidden lo
 Bug 3: Role Displayed to Everyone (Information Leak)
 A logged-in user's home page directly displays their email and user role (e.g., administrator). This reveals sensitive information.
 
-👥 Lack of Role-Based Access Control
+ Lack of Role-Based Access Control
 Comparison of admin and regular user rights reveals that role-based access control is absent.
 
 Endpoint	Admin Account	Regular Account
-/	 200	 200
-/resources	 200	 200
-/reservation	 200	 200
-/admin	 302	 302
+/	        200	    200
+/resources200	    200
+/reservation200	  200
+/admin	  302	    302
 Result: Both roles have exactly the same permissions.
 
  Risk Analysis and Prioritization
@@ -167,3 +167,4 @@ Session Security: 80% (good, but template bug)
 
 CSRF Protection: 30% (partially functional)
 ```
+
