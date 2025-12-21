@@ -77,7 +77,7 @@ Tämä kurssi opetti minut siirtymään teoreettisesta tietoturvatiedosta käyt�
 
 **Käytetyt tunnit yhteensä:** **49 tuntia**
 
-**Käytetyt tunnit aiheittain:**  **3 tuntia**
+**Käytetyt tunnit aiheittain:**  **3 tuntia - 7 tuntia**
 
 | Aihe                            |    Tunnit     |
 | :------------------------------ | :-----------: |
@@ -97,6 +97,7 @@ Tämä kurssi opetti minut siirtymään teoreettisesta tietoturvatiedosta käyt�
 Kurssi tarjosi erinomaisen käytännönläheisen johdatuksen penetraatiotestaukseen. Booking System -projekti oli erityisen hyödyllinen, sillä se simuloi aidosti tyypillistä turvallisuustarkistuksen työnkulkua aina haavoittuvuuksien etsinnästä raportointiin. OWASP ZAP:n käyttö ja manuaalisen testauksen opettelu olivat arvokkaita taitoja. Ainoa parannusehdotus olisi enemmän aikaa ja mahdollisesti yksi ylimääräinen vaihe, joka keskittyisi XSS- tai SS-haavoittuvuuksiin.
 
 ---
+
 
 
 
