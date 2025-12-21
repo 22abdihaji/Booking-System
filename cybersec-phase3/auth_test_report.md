@@ -1,181 +1,169 @@
-Authorization Test Report - Booking System Phase 3
-Raportin perustiedot
-Tiedot Arvo
-Testaaja Ali Haji
-Päivämäärä 2025-12-18
-Testausympäristö Docker Desktop, Deno + PostgreSQL
-Testikohde Booking System
-Docker Image vheikkiniemi/cybersec-web-phase3:v1.1
-Kontti ID 9da44acd6cce
-Status Kontti pyörii (yli 3 tuntia)
-Testausmenetelmä
-Testauksessa käytettiin manuaalisia cURL-komentoja Docker Desktopin Exec-välilehden kautta. Istuntojen hallintaa varten evästeet tallennettiin tiedostoihin.
+# Authorization Test Report - Booking System Phase 3
 
-Testattavat asiat:
+## Basic Information
 
-Pääsynvalvonta eri endpointteihin
+| Information          | Value                                   |
+| :------------------- | :-------------------------------------- |
+| **Tester**           | Ali Haji                                |
+| **Date**             | 2025-12-18                              |
+| **Test Environment** | Docker Desktop, Deno + PostgreSQL       |
+| **Target**           | Booking System                          |
+| **Docker Image**     | `vheikkiniemi/cybersec-web-phase3:v1.1` |
+| **Container ID**     | `9da44acd6cce`                          |
+| **Status**           | Container running (over 3 hours)        |
 
-CSRF-suojauksen toiminta
+---
 
-Admin-roolin oikeellisuus ja näkyvyys
+## Testing Methodology
 
-Logout-toiminnallisuus
+Testing was performed using **manual cURL commands** via Docker Desktop's Exec tab. Session cookies were saved to files for management.
 
-Löydetyt Endpointit ja Niiden Tilat
-Endpoint HTTP-status Selite
-GET / 200 OK Julkinen etusivu
-GET /login 200 OK Julkinen kirjautumislomake
-GET /register 200 OK Julkinen rekisteröintilomake
-GET /resources 200 OK VAKAVA ONGELMA: Resurssien hallinta avoinna kaikille
-GET /reservation 303 See Other Ohjaa "Unauthorized" -sivulle
-GET /profile 302 Found Ohjaa "Not Found" -virheeseen
-GET /admin 302 Found Ohjaa "Not Found" -virheeseen
-Kriittiset Turvallisuusongelmat
-ONGELMA 1: Julkinen pääsy resurssien hallintaan
-Vaarallisuus: ERITTÄIN KORKEA
-Todistus:
+**Tested Areas:**
 
-bash
+1. Access control to different endpoints
+2. CSRF protection functionality
+3. Admin role correctness and visibility
+4. Logout functionality
+
+---
+
+## 📡 Discovered Endpoints and Their Status
+
+| Endpoint           | HTTP Status     | Description                                              |
+| :----------------- | :-------------- | :------------------------------------------------------- |
+| `GET /`            | `200 OK`        | Public home page                                         |
+| `GET /login`       | `200 OK`        | Public login form                                        |
+| `GET /register`    | `200 OK`        | Public registration form                                 |
+| `GET /resources`   | `200 OK`        | **CRITICAL ISSUE: Resource management open to everyone** |
+| `GET /reservation` | `303 See Other` | Redirects to "Unauthorized" page                         |
+| `GET /profile`     | `302 Found`     | Redirects to "Not Found" error                           |
+| `GET /admin`       | `302 Found`     | Redirects to "Not Found" error                           |
+
+---
+
+## Critical Security Issues
+
+### **ISSUE 1: Public Access to Resource Management**
+
+**Severity:** VERY HIGH
+**Proof:**
+
+```bash
 curl -s -w "Status: %{http_code}\n" -o /tmp/test.html http://localhost:8000/resources
-
 # Status: 200
+# Content: Form for creating/editing resources is available.
 
-# Sisältö: Lomake resurssien luomiseen/muokkaamiseen on saatavilla.
 
-Vaikutus: Kuka tahansa internetin käyttäjä voi luoda, muokata tai mahdollisesti poistaa järjestelmän resursseja.
-Kiireellisyys: KORJATAAN HETI
+Impact: Any internet user can create, edit, or potentially delete the system's resources.
+Priority: FIX IMMEDIATELY
 
-ONGELMA 2: CSRF-suojauksen puute
-Vaarallisuus: KORKEA
-Todistus:
+ISSUE 2: Lack of CSRF Protection
+Severity: HIGH
+Proof:
 
 bash
 curl -s -X POST http://localhost:8000/resources \
- -d "resource_name=HÄKÄTTY&resource_description=Ei CSRF:ää" \
- -w "Status: %{http_code}"
+  -d "resource_name=HACKED&resource_description=No CSRF" \
+  -w "Status: %{http_code}"
+# Status: 302 (Succeeded without CSRF token)
+Impact: An attacker can trick a logged-in user into performing malicious actions (e.g., creating resources).
+Priority: FIX IMMEDIATELY
 
-# Status: 302 (Onnistui ilman CSRF-tokenia)
-
-Vaikutus: Hyökkääjä voi huijata kirjautuneen käyttäjän suorittamaan haitallisia toimintoja (esim. resurssien luonti).
-Kiireellisyys: KORJATAAN HETI
-
-Hyvin Toimivat Asiat
-
-1. CSRF-tokenien generointi
-   bash
-   curl -s http://localhost:8000/register | grep -o 'value="[^"]\*"'
-
+ Things Working Well
+1. CSRF Token Generation
+bash
+curl -s http://localhost:8000/register | grep -o 'value="[^"]*"'
 # value="6b2c8bde-769a-4f43-89a0-e32f13680144"
+Token is generated and also stored in a cookie (good practice).
 
-Token luodaan ja se tallennetaan myös evästeeseen (hyvä käytäntö).
+2. Login, Registration and Logout
+Registration with admin role is successful.
 
-2. Kirjautuminen, rekisteröityminen ja logout
-   Rekisteröinti admin-roolilla onnistuu.
+Admin login works and session is created.
 
-Admin-kirjautuminen toimii ja sessio luodaan.
+Logout function redirects away (302) and session is terminated.
 
-Logout-toiminto ohjaa pois (302) ja istunto puretaan.
-
-3. Hyvät turva-asetukset
-   text
-   HTTP-Headers:
-
+3. Good Security Headers
+text
+HTTP Headers:
 - content-security-policy: default-src 'self'
 - x-frame-options: DENY
 - x-content-type-options: nosniff
 - set-cookie: session_id=XXX; HttpOnly; SameSite=Strict
-  Nämä estävät tehokkaasti XSS-, clickjacking- ja CSRF-hyökkäyksiä.
+These effectively prevent XSS, clickjacking, and CSRF attacks.
 
-Löydetyt Bugit ja Puutteet
-Bug 1: CSRF-token ei korvaudu templatessa
-Löytö:
+ Found Bugs and Deficiencies
+Bug 1: CSRF Token Not Rendered in Template
+Finding:
 
 html
-
-<!-- /resources -sivun lähdekoodissa -->
+<!-- In /resources page source -->
 <input type="hidden" name="csrf_token" value="{{csrf_token}}">
-Tokenin paikka on {{csrf_token}} eikä se korvaudu todellisella arvolla, joten CSRF-suojaus on täysin rikki tällä sivulla.
+The placeholder {{csrf_token}} is not replaced with an actual value, so CSRF protection is completely broken on this page.
 
-Bug 2: Admin-paneelia ei löydy
-Kaikki testatut admin-endpointit (/admin, /admin/dashboard, jne.) palauttavat 302 ja ohjaavat "Not Found" -virhesivulle.
+Bug 2: Admin Panel Not Found
+All tested admin endpoints (/admin, /admin/dashboard, etc.) return 302 and redirect to "Not Found" error page.
 
-Tulkinta: Admin-toimintoja ei ole toteutettu tai ne ovat jossain piilotetussa sijainnissa.
+Interpretation: Admin functions are either not implemented or are in a hidden location.
 
-Bug 3: Roolin näyttäminen kaikille (Infoleak)
-Kirjautuneen käyttäjän etusivulla näytetään suoraan sähköposti ja käyttäjärooli (esim. administrator). Tämä paljastaa herkkää tietoa.
+Bug 3: Role Displayed to Everyone (Information Leak)
+A logged-in user's home page directly displays their email and user role (e.g., administrator). This reveals sensitive information.
 
-Roolipohjaisen Pääsyn Puute
-Vertailu admin- ja tavallisen käyttäjän oikeuksista paljastaa, että roolipohjaista pääsynvalvontaa ei ole.
+👥 Lack of Role-Based Access Control
+Comparison of admin and regular user rights reveals that role-based access control is absent.
 
-Endpoint Admin-tili Tavallinen tili
-/ 200 200
-/resources 200 200
-/reservation 200 200
-/admin 302 302
-Tulos: Molemmilla rooleilla on täsmälleen samat oikeudet.
+Endpoint	Admin Account	Regular Account
+/	 200	 200
+/resources	 200	 200
+/reservation	 200	 200
+/admin	 302	 302
+Result: Both roles have exactly the same permissions.
 
-Riskianalyysi ja Priorisointi
-Ongelma Vaarallisuus Kiireellisyys Suositus korjaukselle
-Julkinen /resources ERITTÄIN KORKEA HETI Lisää requireAuth middleware endpointille.
-CSRF-suojauksen puute KORKEA HETI Toteuta ja vaadi CSRF-token kaikille POST-pyynnöille.
-CSRF-template-bugi KESKITASO 1-2 PV Korjaa template ({{csrf_token}} → <%= csrfToken %>).
-Admin-toimintojen puuttuminen KESKITASO 1 VIIKKO Toteuta admin-paneeli ja roolipohjainen valvonta.
-Roolin näyttäminen (Infoleak) MATALA 1 VIIKKO Poista roolin näyttäminen julkisesti käyttäjälle.
-Yhteenveto ja Suositus
-Booking Systemin turvallisuustila: HUONO
+ Risk Analysis and Prioritization
+Issue	Severity	Priority	Recommended Fix
+Public /resources	 VERY HIGH	IMMEDIATE	Add requireAuth middleware to the endpoint.
+Lack of CSRF Protection	 HIGH	IMMEDIATE	Implement and require CSRF tokens for all POST requests.
+CSRF Template Bug	 MEDIUM	1-2 DAYS	Fix template ({{csrf_token}} → <%= csrfToken %>).
+Missing Admin Functions	 MEDIUM	1 WEEK	Implement admin panel and role-based controls.
+Role Display (Info Leak)	 LOW	1 WEEK	Remove role display from public user view.
+ Summary and Recommendation
+Booking System Security Status: POOR
 
-Järjestelmässä on kriittisiä haavoittuvuuksia (julkinen resurssienhallinta, CSRF), jotka mahdollistavat koko järjestelmän sabotoinnin. Perusturva-asetukset (CSP, evästeet) ovat hyvällä mallilla, mutta sovelluslogiikan turvallisuus on puutteellinen.
+The system contains critical vulnerabilities (public resource management, CSRF) that could allow the entire system to be sabotaged. Basic security settings (CSP, cookies) are on a good track, but application logic security is deficient.
 
-Ratkaisusuositus kehitystiimille:
+Solution recommendation for the development team:
 
-ÄLÄ KÄYNNISTÄ JÄRJESTELMÄÄ TUOTANTOTILAAN ENNEN KUIN NÄMÄ KRIITTISET ONGELMAT ON KORJATTU. Aloita korjaukset listan yläpäästä (julkinen pääsy, CSRF).
+DO NOT DEPLOY THE SYSTEM TO PRODUCTION BEFORE THESE CRITICAL ISSUES ARE FIXED. Start fixes from the top of the list (public access, CSRF).
 
-🔧 Testikomentoja ja Liitteitä
-Käytetyt testikomennot:
+ Test Commands and Attachments
+Commands Used:
 
 bash
-
-# Julkinen pääsy testaus
-
+# Public access test
 curl http://localhost:8000/resources
 
-# CSRF-testaus
+# CSRF test
+curl -X POST http://localhost:8000/resources -d "resource_name=TEST"
 
-curl -X POST http://localhost:8000/resources -d "resource_name=TESTI"
-
-# Admin-pääsyn testaus
-
+# Admin access test
 curl -b admin_session.txt http://localhost:8000/admin
-Testausympäristön tiedot:
+Test Environment Details:
 
 Image: vheikkiniemi/cybersec-web-phase3:v1.1
 
-Portit: 8003:8000 (sovellus), 5435 (PostgreSQL)
+Ports: 8003:8000 (application), 5435 (PostgreSQL)
 
-Tietokanta: PostgreSQL
+Database: PostgreSQL
 
-Tila: Kontti pyörii normaalisti
+Status: Container running normally
 
-Koetulokset yhteenvetona:
+Summary of Test Results:
 
-Autentikointi: 90% (toimii)
+Authentication: 90% (functional)
 
-Valtuutus (Authorization): 40% (puutteellinen)
+Authorization: 40% (deficient)
 
-Istuntojen turvallisuus: 80% (hyvä, mutta template-bugi)
+Session Security: 80% (good, but template bug)
 
-CSRF-suojaus: 30% (toimii osittain)
-
-
-
-
-
-   
-
-
-
-
-
-
-
-
+CSRF Protection: 30% (partially functional)
+```
