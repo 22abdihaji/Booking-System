@@ -19,3 +19,5 @@
 | 02.12.2025 | 4          | BookingSystem-Phase1 Part 2: Reports, Findings                           | Finished   |
 | 12.12.2025 | 5          | BookingSystem-Phase2: Password Cracking & ZAP Testing	                   | Finished   |           
 | 18.12.2025 | 4          | BookingSystem-Phase3: Authorization Testing & Security Assessment        | Finished   |
+| 21.12.2025 | 4          | Loppuraportin kirjoittaminen & Viimeistely                               | Finished   |
+| 21.12.2025 | 2          | Github repon viimeistely ja dokumenttien järjestely                      | Finished   |
