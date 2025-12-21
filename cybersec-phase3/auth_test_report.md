@@ -114,8 +114,8 @@ Comparison of admin and regular user rights reveals that role-based access contr
 
 Endpoint	Admin Account	Regular Account
 /	        200	    200
-/resources200	    200
-/reservation200	  200
+/resources  200	  200
+/reservation 200  200
 /admin	  302	    302
 Result: Both roles have exactly the same permissions.
 
@@ -167,4 +167,5 @@ Session Security: 80% (good, but template bug)
 
 CSRF Protection: 30% (partially functional)
 ```
+
 
