@@ -1,4 +1,4 @@
-# Penetraatiotestauksen Kurssin Loppuraportti
+# Kyberturvallisuus Kurssin Loppuraportti
 
 **Nimi:** Ali Haji  
 **Päivämäärä:** 21. joulukuuta 2025
@@ -7,7 +7,7 @@
 
 ## PortSwigger
 
-Alla on kuvakaappaus PortSwigger Academyn työpöydästäni, joka osoittaa suoritetut moduulit.
+ Kuvakaappaukset löytyy toisesta kansiosta PortSwigger Academyn työpöydästäni, joka osoittaa suoritetut moduulit.
 
 **Suoritetut laboratoriot (koko lista):**
 
@@ -97,6 +97,7 @@ Tämä kurssi opetti minut siirtymään teoreettisesta tietoturvatiedosta käyt�
 Kurssi tarjosi erinomaisen käytännönläheisen johdatuksen penetraatiotestaukseen. Booking System -projekti oli erityisen hyödyllinen, sillä se simuloi aidosti tyypillistä turvallisuustarkistuksen työnkulkua aina haavoittuvuuksien etsinnästä raportointiin. OWASP ZAP:n käyttö ja manuaalisen testauksen opettelu olivat arvokkaita taitoja. Ainoa parannusehdotus olisi enemmän aikaa ja mahdollisesti yksi ylimääräinen vaihe, joka keskittyisi XSS- tai SS-haavoittuvuuksiin.
 
 ---
+
 
 
 
